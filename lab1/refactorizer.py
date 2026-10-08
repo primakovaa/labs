@@ -1,7 +1,10 @@
 import json
 import pandas as pd
 from collections import Counter
-
+"""
+Refactorizer - модуль формирования готового датасета, анализа в виде "TOP-20" и сохранения обработанных данных в CSV-файл.
+Авторство: Тюлин Константин, МТ-201
+"""
 class Refactorizer:
     def __init__(self):
         pass
