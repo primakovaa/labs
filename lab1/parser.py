@@ -19,6 +19,7 @@ class Parser:
         self.messages = []
         self.normalize_messages = []
         self.values = []
+        self.data_frame = None
 
         self._emails = []
         self._phones = []
@@ -26,15 +27,16 @@ class Parser:
         self._dates = []
         self._prices = []
     def open(self, file):
-        data_frame = pd.read_csv(file)
-        self.data_frame = data_frame
+        self.data_frame = pd.read_csv(file)
     def analyze(self):
+        if self.data_frame is None:
+            raise ValueError("DataFrame is not loaded, please call open() first.")
         self.data_types = self.data_frame.dtypes
         for value in self.data_frame.values:
             self.messages.append(value[3])
             self.values.append(value)
     def normalize(self):
-        for i, message in enumerate(self.messages):
+        for message in self.messages:
             message = message.lower()
             message = message.replace("ё", "е")
             message = re.sub(r"[^\w\s]", " ", message)
