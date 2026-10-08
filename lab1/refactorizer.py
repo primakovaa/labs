@@ -162,21 +162,3 @@ class Refactorizer:
             return
         self.dataset.to_csv(path, index=False, encoding="utf-8-sig")
         print(f"Сохранение файла в {path}")
-
-
-
-
-if __name__ == "__main__":
-    from parser import Parser
-    from tokenizator import Tokenizator
-    p = Parser()
-    p.open("data/source.csv")
-    p.analyze()
-    p.extract()
-
-    tok = Tokenizator()
-
-    ref = Refactorizer("clean_msgs.csv")
-    ref.process_dataset(p, tok)
-    ref.build_top_words(20)
-    ref.save()
